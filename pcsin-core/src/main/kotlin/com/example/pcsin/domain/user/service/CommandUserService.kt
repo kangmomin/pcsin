@@ -7,7 +7,7 @@ import com.example.pcsin.domain.user.spi.CommandUserPort
 import com.example.pcsin.domain.user.usecase.CommandUserUseCase
 
 @Service
-class CommandUserService(
+open class CommandUserService(
     private val commandUserPort: CommandUserPort
 ): CommandUserUseCase {
     override fun joinUser(user: User) {

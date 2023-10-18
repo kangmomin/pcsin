@@ -1,14 +1,15 @@
 package com.example.pcsin.domain.user.model
 
 import java.time.LocalDateTime
+import java.util.*
 
 data class User(
-    val userId: Int,
-    val email: String,
-    val name: String,
-    val password: String,
-    val salt: String,
-    val createdAt: LocalDateTime,
-    val lastUpdatedAt: LocalDateTime
+    val userId: UUID? = null,
+    val email: String? = null,
+    val name: String? = null,
+    val password: String? = null,
+    val salt: String? = null,
+    val createdAt: LocalDateTime? = null,
+    val lastUpdatedAt: LocalDateTime? = null
 ) {
 }
