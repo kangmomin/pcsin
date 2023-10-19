@@ -1,21 +1,34 @@
 package com.example.pcsin.common.entity
 
 import jakarta.persistence.Column
-import jakarta.persistence.EntityListeners
-import jakarta.persistence.MappedSuperclass
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
-import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import jakarta.persistence.PrePersist
+import jakarta.persistence.PreUpdate
 import java.time.LocalDateTime
+import java.time.ZoneId
 
-@MappedSuperclass
-@EntityListeners(AuditingEntityListener::class)
-abstract class BasicTimeEntity {
-    @CreatedDate
+
+open class BasicTimeEntity {
+
     @Column(nullable = false, updatable = false)
-    val createdAt: LocalDateTime = LocalDateTime.now()
+    var createdAt: LocalDateTime = LocalDateTime.now()
 
-    @LastModifiedDate
     @Column(nullable = false)
-    val updatedAt: LocalDateTime = LocalDateTime.now()
+    var updatedAt: LocalDateTime = LocalDateTime.now()
+
+    @PrePersist
+    fun preSave() {
+        this.createdAt = getSeoulDateTime()
+        this.updatedAt = getSeoulDateTime()
+    }
+
+    @PreUpdate
+    fun preUpdate() {
+        this.updatedAt = getSeoulDateTime()
+    }
+
+    private fun getSeoulDateTime(): LocalDateTime {
+        val now = LocalDateTime.now()
+        val seoulZone = ZoneId.of("Asia/Seoul")
+        return now.atZone(seoulZone).toLocalDateTime()
+    }
 }
