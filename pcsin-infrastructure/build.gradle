@@ -14,5 +14,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    runtimeOnly 'org.postgresql:postgresql:42.6.0'
+
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.10.3'
+
     implementation project(":pcsin-core")
+    implementation project(":pcsin-presentation")
+    implementation project(":pcsin-persistence")
 }

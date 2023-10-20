@@ -7,8 +7,8 @@ data class User(
     val userId: UUID? = null,
     val email: String? = null,
     val name: String? = null,
-    val password: String? = null,
-    val salt: String? = null,
+    var password: String? = null,
+    var salt: String? = null,
     val createdAt: LocalDateTime? = null,
     val lastUpdatedAt: LocalDateTime? = null
 ) {
