@@ -11,7 +11,7 @@ data class BasicResponse<T> (
     companion object {
         fun error(code: ErrorCode) = ResponseEntity
                 .status(code.code)
-                .body(code.msg)
+                .body(BasicResponseDto(code.msg))
 
         fun created(data: Any?) = ResponseEntity
             .status(HttpStatus.CREATED)
