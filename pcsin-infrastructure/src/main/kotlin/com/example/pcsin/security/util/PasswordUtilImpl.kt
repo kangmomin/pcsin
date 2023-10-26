@@ -12,9 +12,8 @@ class PasswordUtilImpl(
 ): PasswordUtil {
     override fun encode(password: String, salt: String): String =
         pwdEncoder.encode(password + salt)
-    override fun match(rawPassword: String, salt: String, encodedPassword: String) {
+    override fun match(rawPassword: String, salt: String, encodedPassword: String) =
         pwdEncoder.matches(rawPassword + salt, encodedPassword)
-    }
 
     override fun generateSalt(): String {
         val random = SecureRandom()

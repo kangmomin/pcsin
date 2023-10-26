@@ -10,4 +10,8 @@ enum class ErrorCode(
     USER_ALREADY_EXIST("이미 존재하는 아이디입니다.", 409),
 
     INTERNAL_SERVER_ERROR("서버에 문제가 발생하였습니다", 500),
+
+    EXPIRED_TOKEN("로그인 세션이 만료되었습니다.", 400),
+    INVALID_TOKEN("토큰이 정상적이지 않습니다.", 400),
+    JSON_NOT_READABLE("필수 인자가 전달되지 않았습니다.", 400),
 }

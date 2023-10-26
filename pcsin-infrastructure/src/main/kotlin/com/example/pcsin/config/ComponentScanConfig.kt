@@ -14,8 +14,9 @@ import org.springframework.context.annotation.FilterType
         Filter(
             type = FilterType.ANNOTATION,
             classes = [
+                Util::class,
                 Service::class,
-                Util::class
+//                ReadOnlyUseCase::class
             ]
         )
     ]

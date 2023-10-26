@@ -56,3 +56,11 @@ subprojects { subproject ->
         implementation 'org.jetbrains.kotlin:kotlin-reflect'
     }
 }
+
+allOpen {
+    annotation("org.springframework.stereotype.Controller")
+    annotation("org.springframework.stereotype.Service")
+    annotation("org.springframework.stereotype.Repository")
+    annotation("org.springframework.boot.autoconfigure.SpringBootApplication")
+    annotation("org.springframework.context.annotation.Configuration")
+}
