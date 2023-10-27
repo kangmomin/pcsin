@@ -6,7 +6,7 @@ import com.example.pcsin.domain.post.spi.CommandPostPort
 import com.example.pcsin.domain.post.usecase.CommandPostUseCase
 
 @Service
-class CommandPostService(
+open class CommandPostService(
     private val commandPostPort: CommandPostPort
 ): CommandPostUseCase {
     override fun writePost(post: Post) =
