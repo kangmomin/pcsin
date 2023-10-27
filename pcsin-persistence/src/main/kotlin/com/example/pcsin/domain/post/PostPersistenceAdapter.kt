@@ -5,7 +5,9 @@ import com.example.pcsin.domain.post.mapper.PostMapper
 import com.example.pcsin.domain.post.model.Post
 import com.example.pcsin.domain.post.repository.PostRepository
 import com.example.pcsin.domain.post.spi.PostPort
+import org.springframework.stereotype.Component
 
+@Component
 class PostPersistenceAdapter(
     private val postMapper: PostMapper,
     private val postRepository: PostRepository
