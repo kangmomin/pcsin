@@ -14,4 +14,6 @@ enum class ErrorCode(
     EXPIRED_TOKEN("로그인 세션이 만료되었습니다.", 400),
     INVALID_TOKEN("토큰이 정상적이지 않습니다.", 400),
     JSON_NOT_READABLE("필수 인자가 전달되지 않았습니다.", 400),
+    
+    POST_NOT_SAVED("글이 작성되지 않았습니다.", 400),
 }
