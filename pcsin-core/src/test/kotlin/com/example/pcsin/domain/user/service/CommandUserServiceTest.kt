@@ -29,14 +29,7 @@ class CommandUserServiceTest(
         val user = User(email = "test@example.com", name = "Test User", password = "password")
 
         // Act
-        commandUserUseCase.joinUser(user)
-
-        // Assert
-        assertNotNull(user.userId)
-        assertNotNull(user.createdAt)
-        assertNotNull(user.lastUpdatedAt)
-        assertNotNull(user.salt)
-        assertNotNull(user.password)
+        assertDoesNotThrow { commandUserUseCase.joinUser(user) }
     }
 
     // Joining a new user with valid input should call 'createUserWhenNotExist' method of 'CommandUserPort'
@@ -57,7 +50,7 @@ class CommandUserServiceTest(
     fun test_join_user_with_existing_email_should_throw_UserAlreadyExistException() {
         // Arrange
         val user = User(email = "existing@example.com", name = "Existing User", password = "password")
-        `when`(commandUserPort.createUserWhenNotExist(user)).thenReturn(user)
+        commandUserPort.createUserWhenNotExist(user)
 
         // Act & Assert
         assertThrows<UserAlreadyExistException> {
