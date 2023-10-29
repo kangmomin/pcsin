@@ -16,4 +16,6 @@ enum class ErrorCode(
     JSON_NOT_READABLE("필수 인자가 전달되지 않았습니다.", 400),
     
     POST_NOT_SAVED("글이 작성되지 않았습니다.", 400),
+
+    UNAUTHORIZED("로그인 정보가 없습니다.", 401),
 }
