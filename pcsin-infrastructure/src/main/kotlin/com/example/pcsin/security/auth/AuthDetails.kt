@@ -4,7 +4,7 @@ import com.example.pcsin.domain.user.exception.UserNotFoundException
 import com.example.pcsin.domain.user.model.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import java.util.UUID
+import java.util.*
 
 class AuthDetails(
     private val user: User

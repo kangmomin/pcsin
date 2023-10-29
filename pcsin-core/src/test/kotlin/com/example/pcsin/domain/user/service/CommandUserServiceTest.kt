@@ -5,13 +5,11 @@ import com.example.pcsin.domain.user.model.User
 import com.example.pcsin.domain.user.spi.CommandUserPort
 import com.example.pcsin.domain.user.usecase.CommandUserUseCase
 import org.junit.jupiter.api.Assertions.assertDoesNotThrow
-import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito.verify
-import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
 
 @ExtendWith(MockitoExtension::class)

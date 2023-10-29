@@ -3,7 +3,7 @@ package com.example.pcsin.domain.post.dto.request
 import com.example.pcsin.domain.post.model.Post
 import jakarta.validation.constraints.NotEmpty
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 data class WritePostRequest(
     @NotEmpty(message = "제목이 입력 되지 않았습니다")
