@@ -1,6 +1,7 @@
 package com.example.pcsin.domain.user.service
 
 import com.example.pcsin.common.annotation.Service
+import com.example.pcsin.common.security.JwtProperties
 import com.example.pcsin.common.security.JwtProvider
 import com.example.pcsin.common.security.PasswordUtil
 import com.example.pcsin.domain.user.dto.JwtTokens
@@ -26,7 +27,7 @@ open class QueryUserService(
             val refreshToken = jwtProvider.generateRefreshToken(loginInfo.email)
 
             JwtTokens(
-                accessToken = accessToken,
-                refreshToken = refreshToken)
+                accessToken = JwtProperties.PREFIX + accessToken,
+                refreshToken = JwtProperties.PREFIX + refreshToken)
         }
 }

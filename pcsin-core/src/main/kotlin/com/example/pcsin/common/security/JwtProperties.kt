@@ -1,6 +1,4 @@
-package com.example.pcsin.jwt
-
-import io.jsonwebtoken.security.Keys
+package com.example.pcsin.common.security
 
 object JwtProperties {
     const val ACCESS_TYPE = "access"
@@ -9,5 +7,4 @@ object JwtProperties {
     const val HEADER = "Authorization"
     const val ACCESS_EXP = 60L * 15 // 15분
     const val REFRESH_EXP = 60L * 60 * 24 * 7 // 1주일
-    val SECRET = Keys.hmacShaKeyFor("paowdpawdasdwasd!#@#!@#Asdwa2132@#aowk".toByteArray(Charsets.UTF_8))
 }

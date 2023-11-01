@@ -1,5 +1,6 @@
 package com.example.pcsin.jwt
 
+import com.example.pcsin.common.security.JwtProperties
 import com.example.pcsin.common.security.JwtProvider
 import com.example.pcsin.exception.ExpiredTokenException
 import com.example.pcsin.exception.InvalidTokenException
@@ -11,6 +12,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 import java.util.*
+import kotlin.collections.ArrayList
 
 @Component
 class JwtProviderImpl(
@@ -25,7 +27,7 @@ class JwtProviderImpl(
 
     private fun generateToken(email: String, type: String, exp: Long): String =
         Jwts.builder()
-            .signWith(JwtProperties.SECRET)
+            .signWith(JwtKeys.SECRET)
             .setSubject(type)
             .claim("email", email)
             .setIssuedAt(Date())
@@ -34,13 +36,14 @@ class JwtProviderImpl(
 
     override fun resolveAccessToken(token: String): String? {
         try {
-            if (!token.startsWith(JwtProperties.PREFIX)) return null
+            if (!token.startsWith(JwtProperties.PREFIX)) throw InvalidTokenException()
 
             val replacedToken = token.replace(JwtProperties.PREFIX, "")
-            return Jwts.parserBuilder()
-                .setSigningKey(JwtProperties.SECRET)
+            val jwtData = Jwts.parserBuilder()
+                .setSigningKey(JwtKeys.SECRET)
                 .build()
                 .parseClaimsJws(replacedToken)
+            return jwtData
                 .body["email"].toString()
         } catch (e: ExpiredJwtException) {
             throw ExpiredTokenException()
@@ -56,7 +59,7 @@ class JwtProviderImpl(
 
             val replacedToken = token.replace(JwtProperties.PREFIX, "")
             return Jwts.parserBuilder()
-                .setSigningKey(JwtProperties.SECRET)
+                .setSigningKey(JwtKeys.SECRET)
                 .build()
                 .parseClaimsJws(replacedToken)
                 .body["email"].toString()
@@ -69,6 +72,6 @@ class JwtProviderImpl(
 
     fun getAuthentication(token: String): Authentication {
         val user: UserDetails = authDetailsService.loadUserByUsername(resolveAccessToken(token))
-        return UsernamePasswordAuthenticationToken(user, "")
+        return UsernamePasswordAuthenticationToken(user, "", ArrayList())
     }
 }

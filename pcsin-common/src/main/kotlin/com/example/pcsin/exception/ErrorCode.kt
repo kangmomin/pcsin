@@ -18,4 +18,5 @@ enum class ErrorCode(
     POST_NOT_SAVED("글이 작성되지 않았습니다.", 400),
 
     UNAUTHORIZED("로그인 정보가 없습니다.", 401),
+    FORBIDDEN("작업에 필요한 권한이 부족합니다.", 403),
 }
