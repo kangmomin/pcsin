@@ -1,9 +1,10 @@
 package com.example.pcsin.domain.post.repository
 
 import com.example.pcsin.domain.post.entity.PostEntity
-import org.springframework.data.repository.CrudRepository
+import com.example.pcsin.domain.post.repository.custom.PostRepositoryPagingCustom
+import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface PostRepository: CrudRepository<PostEntity, Long> {
+interface PostRepository: JpaRepository<PostEntity, Long>, PostRepositoryPagingCustom {
 }

@@ -1,8 +1,15 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
 plugins {
     id("org.springframework.boot") version "3.1.2"
     id("io.spring.dependency-management") version "1.1.2"
     id 'org.jetbrains.kotlin.plugin.spring' version '1.8.22'
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.8.22'
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 repositories {
@@ -17,6 +24,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
 
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.1.2'
+
     runtimeOnly 'org.postgresql:postgresql:42.6.0'
 
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.10.3'
@@ -25,7 +34,32 @@ dependencies {
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
+    implementation "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta"
+
+    annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+
     implementation project(":pcsin-core")
     implementation project(":pcsin-presentation")
     implementation project(":pcsin-persistence")
+}
+
+
+def queryDslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = queryDslDir
+}
+
+sourceSets {
+    main.java.srcDir queryDslDir
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
 }
